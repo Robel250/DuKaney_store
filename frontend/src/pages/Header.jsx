@@ -91,9 +91,7 @@ const AddProduct = () => {
         <Link to="/aboutus" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "15px" }}>About</Link>
           <Link to="/contact" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "15px" }}>Contact_us</Link>
          
-          <Link to="/view-product" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "15px" }}>View Product</Link>
-          <Link to="/sale" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "15px" }}>Sale</Link>
-          <Link to="/sale-view" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "15px" }}>Sale View</Link>
+       
           <Link to="/product-log" style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.65)", fontWeight: "bold", marginRight: "3px" }}>Product Log</Link>
          
         </div>
@@ -109,44 +107,44 @@ const AddProduct = () => {
           <Link to={"/dashboard"} style={{textDecoration:"none"}}>
           <li className="nav-item">
             <FaHome style={{color:"rgba(0, 0, 0, 0.7)"}}/>
-            <span style={{marginLeft:"10%"}}>Home</span>
+            <span style={{marginLeft:"10%", color:"rgba(0, 0, 0, 0.7)"}}>Home</span>
           </li>
           </Link>
           <Link to={"/home"} style={{textDecoration:"none"}}>
           <li className="nav-item">
             
             <MdProductionQuantityLimits style={{color:"rgba(0, 0, 0, 0.7)"}} />
-            <span style={{marginLeft:"10%"}}>Product</span>
+            <span style={{marginLeft:"10%",color:"rgba(0, 0, 0, 0.7)"}}>Product</span>
           </li>
           </Link>
           <Link to="/items/create" style={{textDecoration:"none"}}>
             <li className="nav-item">
               <IoIosAddCircle style={{color:"rgba(0, 0, 0, 0.7)"}} />
-              <span style={{marginLeft:"10%"}}>Create</span>
+              <span style={{marginLeft:"10%" ,color:"rgba(0, 0, 0, 0.7)"}}>Create</span>
             </li>
           </Link>
           <Link to="/sales-report" style={{textDecoration:"none"}}>
           <li className="nav-item">
          
             <FaFileAlt style={{color:"rgba(0, 0, 0, 0.7)"}}/>
-            <span style={{marginLeft:"10%"}}>Report</span>
+            <span style={{marginLeft:"10%" ,color:"rgba(0, 0, 0, 0.7)"}}>Report</span>
           </li>
           </Link><Link to="/sell-multiple" style={{textDecoration:"none"}}>
           <li className="nav-item">
          
             <LuScanBarcode style={{color:"rgba(0, 0, 0, 0.7)"}}/>
-            <span style={{marginLeft:"10%"}}>Sell</span>
+            <span style={{marginLeft:"10%",color:"rgba(0, 0, 0, 0.7)"}}>Sell</span>
           </li>
           </Link>
           <Link to="/chat" style={{textDecoration:"none"}}>
           <li className="nav-item">
             <FaEnvelope style={{color:"rgba(0, 0, 0, 0.7)"}}/>
-            <span style={{marginLeft:"10%"}}>Messages</span>
+            <span style={{marginLeft:"10%",color:"rgba(0, 0, 0, 0.7)"}}>Messages</span>
           </li>
           </Link> <Link to={"/PendingSellers"}style={{textDecoration:"none"}}>
           <li className="nav-item">
             <FaCog style={{color:"rgba(0, 0, 0, 0.7)"}}/>
-            <span style={{marginLeft:"10%"}}>Settings</span>
+            <span style={{marginLeft:"10%",color:"rgba(0, 0, 0, 0.7)"}}>Settings</span>
           </li></Link>
         </ul>
       </div>
