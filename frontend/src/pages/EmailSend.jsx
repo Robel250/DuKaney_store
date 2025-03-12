@@ -9,7 +9,7 @@ const App = () => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:4444/user/users', {
+        fetch('https://dukaney-store-backend-1.onrender.com/user/users', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -22,7 +22,7 @@ const App = () => {
     const sendEmail = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:4444/user/send-email', {
+            const response = await fetch('https://dukaney-store-backend-1.onrender.com/user/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

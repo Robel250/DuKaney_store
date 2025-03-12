@@ -11,7 +11,7 @@ const PendingSellers = () => {
             return;
         }
         // Fetch pending sellers with authorization header
-        axios.get('http://localhost:4444/user/pending-sellers', {
+        axios.get('https://dukaney-store-backend-1.onrender.com/user/pending-sellers', {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then((res) => setSellers(res.data))
@@ -24,7 +24,7 @@ const PendingSellers = () => {
             return;
         }
         try {
-            await axios.put(`http://localhost:4444/user/approve/${id}`, {}, {
+            await axios.put(`https://dukaney-store-backend-1.onrender.com/user/approve/${id}`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Seller approved successfully');

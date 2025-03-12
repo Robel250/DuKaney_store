@@ -15,7 +15,7 @@ const SignUp = () => {
 
   const handleSignup = () => {
     axios
-      .post("http://localhost:4444/user/signup", { username, email, password })
+      .post("https://dukaney-store-backend-1.onrender.com/user/signup", { username, email, password })
       .then(() => {
         enqueueSnackbar("Sign up successful", { variant: "success",autoHideDuration: 1000, });
         navigate("/");

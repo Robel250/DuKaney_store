@@ -30,7 +30,7 @@ const SellMultipleItems = () => {
 
   const fetchItemDetails = async (barcode) => {
     try {
-      const response = await axios.get(`http://localhost:4444/items/barcode/${barcode}`, {
+      const response = await axios.get(`https://dukaney-store-backend-1.onrender.com/items/barcode/${barcode}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const item = response.data;
@@ -78,7 +78,7 @@ const SellMultipleItems = () => {
       quantitySold: item.quantitySold,
     }));
 
-    axios.post('http://localhost:4444/items/sell-multiple', { items: itemsToSell }, {
+    axios.post('https://dukaney-store-backend-1.onrender.com/items/sell-multiple', { items: itemsToSell }, {
       headers: { Authorization: `Bearer ${token}` },
     }).then(() => {
       enqueueSnackbar('Items sold successfully', { variant: 'success' });

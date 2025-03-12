@@ -39,7 +39,7 @@ const SellBook = () => {
         return;
       }
 
-      const url = `http://localhost:4444/items/${id}/sell`;
+      const url = `https://dukaney-store-backend-1.onrender.com/items/${id}/sell`;
 
       const response = await axios.post(
         url,

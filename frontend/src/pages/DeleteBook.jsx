@@ -10,7 +10,7 @@ const DeleteBook = () => {
 
   const handleDeleteBook = () => {
     axios
-      .delete(`http://localhost:4444/items/${id}`, {
+      .delete(`https://dukaney-store-backend-1.onrender.com/items/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include token in headers
         },

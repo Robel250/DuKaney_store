@@ -11,7 +11,7 @@ const ShowBook = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:4444/items/${id}`, {
+            .get(`https://dukaney-store-backend-1.onrender.com/items/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

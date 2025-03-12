@@ -9,7 +9,7 @@ const SendEmailForm = () => {
         e.preventDefault();
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:4444/user/contact', { subject, message }, {
+            await axios.post('https://dukaney-store-backend-1.onrender.com/user/contact', { subject, message }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             enqueueSnackbar('Email sent successfully',{variant: 'success',  autoHideDuration: 1000,});

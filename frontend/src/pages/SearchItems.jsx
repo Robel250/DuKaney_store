@@ -18,7 +18,7 @@ const SearchItems = () => {
 
     try {
       // Add the token to the headers
-      const response = await axios.get(`http://localhost:4444/items/search/${searchTerm}`, {
+      const response = await axios.get(`https://dukaney-store-backend-1.onrender.com/items/search/${searchTerm}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Attach the token here
         },

@@ -74,7 +74,7 @@ function CreateBooks() {
 
     try {
       // Send the JSON object to the backend
-      const response = await axios.post('http://localhost:4444/items', itemData, {
+      const response = await axios.post('https://dukaney-store-backend-1.onrender.com/items', itemData, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -91,7 +91,7 @@ function CreateBooks() {
 
   const generateScanUrl = () => {
     const randomId = Math.random().toString(36).substr(2, 9);
-    const url = `http://localhost:4444/scan/${randomId}`;
+    const url = `https://dukaney-store-backend-1.onrender.com/scan/${randomId}`;
     setScanUrl(url);
   };
 

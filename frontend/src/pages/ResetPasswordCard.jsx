@@ -24,7 +24,7 @@ const handleSubmit = async (e) => {
   console.log('Request Data:', { token, newPassword });
 
   try {
-      const response = await axios.post('http://localhost:4444/user/reset-password', {
+      const response = await axios.post('https://dukaney-store-backend-1.onrender.com/user/reset-password', {
           token,
           newPassword
       });

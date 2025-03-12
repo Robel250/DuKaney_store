@@ -16,7 +16,7 @@ const Login = () => {
 
   const handleLogin = () => {
     axios
-      .post("http://localhost:4444/user/signin", { username, password })
+      .post("https://dukaney-store-backend-1.onrender.com/user/signin", { username, password })
       .then((response) => {
         const { username } = response.data;
         localStorage.setItem("token", response.data.token);
@@ -33,7 +33,7 @@ const Login = () => {
 
   const forgotPasswordHandler = () => {
     axios
-      .post("http://localhost:4444/user/forgot-password", { email })
+      .post("https://dukaney-store-backend-1.onrender.com/user/forgot-password", { email })
       .then(() => {
         enqueueSnackbar("Reset link sent to email", { variant: "success" ,autoHideDuration: 1000,});
         setShowForgotPassword(false); // Close modal after submission

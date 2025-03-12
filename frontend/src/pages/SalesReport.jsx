@@ -13,7 +13,7 @@ const SalesReport = () => {
     const token = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:4444/sales", {
+      .get("https://dukaney-store-backend-1.onrender.com/sales", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

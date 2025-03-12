@@ -24,7 +24,7 @@ const EditBook = () => {
     }
     setLoading(true);
     axios
-      .get(`http://localhost:4444/items/${id}`, {
+      .get(`https://dukaney-store-backend-1.onrender.com/items/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -72,7 +72,7 @@ const EditBook = () => {
       barcode,
     };
     axios
-      .put(`http://localhost:4444/items/${id}`, data, {
+      .put(`https://dukaney-store-backend-1.onrender.com/items/${id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(() => {

@@ -39,7 +39,7 @@ function Home() {
     }
 
     axios
-      .get("http://localhost:4444/items", {
+      .get("https://dukaney-store-backend-1.onrender.com/items", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
