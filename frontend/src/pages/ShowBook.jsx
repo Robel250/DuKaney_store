@@ -1,81 +1,122 @@
-import React from 'react'
-import { useState,useEffect } from 'react'
-import axios from 'axios'
-import { useParams } from 'react-router-dom'
-import BackTable from '../components/Home/BackTable'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
+import BackTable from '../components/Home/BackTable';
+import { Card, Form, Button } from 'react-bootstrap';
 
 const ShowBook = () => {
+    const [item, setItem] = useState({});
+    const { id } = useParams();
+    const token = localStorage.getItem("token");
 
-    const [book,setBook]=useState({});
-    const {id}=useParams()
-    const token=localStorage.getItem("token")
-    useEffect(()=>{
+    useEffect(() => {
         axios
-        .get(`https://as1backend.onrender.com/books/${id}`,
-            {
-                headers:{
-                    Authorization:`Bearer ${token}`
-                }
-            }
-        )
-        .then((resoponse)=>{
-            setBook(resoponse.data);
-            console.log(book)
-        })
-        .catch((error)=>{console.log(error);})
-    },[]);
-  return (
-    <div className='p-4'>
-      <BackTable />
-      <h1 className='my-4'>show Book</h1>
-      <div className='border border-2 rounded rounded-x1 p-4'>
-       {book.image&&(
-        <div className='w-1/3 pr-4'>
-            <img src={book.image} alt={book.title}/>
+            .get(`http://localhost:4444/items/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((response) => {
+                setItem(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, [id, token]);
+
+    // Format Date for better display
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleString(); // Formats to the local date/time format
+    };
+
+    return (
+        <div className="d-flex justify-content-center mt-4" style={{ width: "60%", marginLeft: "25%" }}>
+            <Card style={{ width: '40rem', padding: '20px' }}>
+                <Card.Body>
+                    <h1 className='text-center mb-4'>Show Product</h1>
+
+                    <Form>
+                        {item.image && (
+                            <div className="w-100 mb-4">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="img-fluid"
+                                />
+                            </div>
+                        )}
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={item.name || ''}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Quantity</Form.Label>
+                            <Form.Control
+                                type="number"
+                                value={item.quantity || ''}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Price</Form.Label>
+                            <Form.Control
+                                type="number"
+                                value={item.price || ''}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Expiry Date</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={formatDate(item.expiryDate)}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Creation Time</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={formatDate(item.createdAt)}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Last Update Time</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={formatDate(item.updatedAt)}
+                                disabled
+                                style={{ borderColor: '#00b8b8', boxShadow: "5px 5px rgb(224, 195, 158)" }}
+                            />
+                        </Form.Group>
+
+                        <Link to={`/items/sell/${id}`}>
+                            <Button variant="primary" className="mt-3" style={{ color: "black", background: "linear-gradient(to right,rgb(224, 195, 158), moccasin)" }}>
+                                Sell This Item
+                            </Button>
+                        </Link>
+                    </Form>
+                </Card.Body>
+            </Card>
         </div>
-       )} 
+    );
+};
 
-
-
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Id</span>
-            <span>{book._id}</span>
-        </div>
-        
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Title</span>
-            <span>{book.title}</span>
-        </div>
-        
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Author</span>
-            <span>{book.author}</span>
-        </div>
-        
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Publish Year</span>
-            <span>{book.publishYear}</span>
-        </div>
-        
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Create Time</span>
-            <span>{new Date(book.createdAt).toString()}</span>
-        </div>
-        
-        <div className='my-4'>
-            <span className='border p-1 rounded mx-2'>Last Update Time</span>
-            <span>{new Date(book.updatedAt).toString()}</span>
-        </div>
-
-
-
-      </div>
-    </div>
-  )
-}
-
-export default ShowBook
-
-
-
-
+export default ShowBook;

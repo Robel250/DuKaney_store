@@ -1,83 +1,4 @@
-// import React from 'react'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { useEffect,useState } from 'react';
-// import axios from 'axios';
-// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-// import { CiSquarePlus } from "react-icons/ci";
 
-// function Home() {
-//   return (
-//     <div className='container p-4'>
-//         <h1 className='lood display-4 mt-5'>Bootlist</h1>
-//       <Link to='/books/create'>
-//       <CiSquarePlus className='display-5'/>
-//       </Link>
-
-// import React, { useEffect, useState } from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { CiSquarePlus } from "react-icons/ci";
-// import { Link } from 'react-router-dom';
-// import BookTable from '../components/Home/BookTable';
-
-// function Home() {
-//     const [books,setbooks]=useState([]);
-//     useEffect(()=>{
-//         axios
-//         .get('http://localhost:4444/books')
-//         .then((response)=>{
-//             setbooks(response.data.data);
-//         })
-//         .catch((error)=>{
-//             console.log(error)
-//         })
-//     },[]);
-
-//   return (
-//     <div className='container p-4'>
-//       <h1 className='lood display-4 mt-5'>Books list</h1>
-//       <Link to='/books/create'>
-//         <CiSquarePlus className='display-5'/>
-//       </Link>
-//       <BookTable books={books}/>
-//     </div>
-//   );
-// }
-
-// export default Home;
-
-// import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import { CiSquarePlus } from "react-icons/ci";
-// import { Link } from 'react-router-dom';
-// import BookTable from '../components/Home/BookTable';
-
-// function Home() {
-//   const [books, setBooks] = useState([]);
-
-//   useEffect(() => {
-//     axios
-//       .get('http://localhost:4444/books')
-//       .then((response) => {
-//         setBooks(response.data.data);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   }, []);
-
-//   return (
-//     <div className='container p-4'>
-//       <h1 className='display-4 mt-5'>Books List</h1>
-//       <Link to='/books/create'>
-//         <CiSquarePlus className='display-5' />
-//       </Link>
-//       <BookTable books={books} />
-//     </div>
-//   );
-// }
-
-// export default Home;
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -85,46 +6,94 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CiSquarePlus } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom";
 import BookTable from "../components/Home/BookTable";
+import { HiOutlineDocumentReport } from "react-icons/hi";
+import { FaHome, FaUser, FaEnvelope, FaCog, FaInfoCircle } from "react-icons/fa";
+import './Sidebar.css';
+import { IoScan } from "react-icons/io5";
+import { LuScanBarcode } from "react-icons/lu";
 
 function Home() {
-  const [books, setBooks] = useState([]);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const usernameLocal = localStorage.getItem("user");
-  console.log(usernameLocal);
-  if (usernameLocal == null) {
+  const token = localStorage.getItem("token");
+
+  if (!usernameLocal) {
     navigate("/");
+    return null;
   }
+
   const handleLogOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/");
   };
 
-  const token = localStorage.getItem("token");
   useEffect(() => {
+    if (!token) {
+      setError("Authorization token is missing");
+      setLoading(false);
+      return;
+    }
+
     axios
-      .get("https://as1backend.onrender.com/books", {
+      .get("http://localhost:4444/items", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then((response) => setBooks(response.data.data))
-      .catch((error) => console.error(error));
-  }, []);
+      .then((response) => {
+        setItems(response.data.data || response.data); // Handle both response types
+        setLoading(false);
+      })
+      .catch((error) => {
+        setLoading(false);
+        if (error.response) {
+          setError(`Error: ${error.response.status} - ${error.response.data.message}`);
+        } else if (error.request) {
+          setError("No response from the server");
+        } else {
+          setError(`Error: ${error.message}`);
+        }
+      });
+  }, [token]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div className="text-danger">{error}</div>;
 
   return (
-    <div className="container p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="display-4 mt-5">Books List</h1>
-        <Link to="/books/create">
-          <CiSquarePlus className="display-5" />
+    <div >
+   <Link to="/sell-multiple">
+        <LuScanBarcode  style={{position:"fixed",
+           width:"5%", 
+           height:"5%",
+           color:"rgba(0, 0, 0, 0.7)",
+           marginLeft:"93%",
+           marginTop:"660px"
+
+           
+           }}/>
         </Link>
-        <span className="mx-2">Welcome,{usernameLocal}!</span>
-        <button className="btn btn-primary my-3 my-3" onClick={handleLogOut}>
-          Log out
-        </button>
+        <h1 className="display-4 mt-5" style={{position:"fixed", marginLeft:"40%"}}>Items List</h1>
+      {/* Main Content */}
+      <div className="container p-4" style={{ flex: 1 }}>
+        <div className="d-flex justify-content-between align-items-center">
+         
+        
+          {/* <span className="mx-2">Welcome, {usernameLocal}!</span> */}
+     
+        </div>
+    
+        {/* <BookTable items={items} /> */}
+        <div className="book-table-container" >
+        <BookTable items={items}  />
       </div>
-      <BookTable books={books} />
+      
+       
+       
+      </div>
     </div>
   );
 }

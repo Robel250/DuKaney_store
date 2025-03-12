@@ -1,94 +1,76 @@
-// import React from 'react'
-// import { CiSquareInfo } from "react-icons/ci";
-// import { MdDelete } from "react-icons/md";
-// import { CiEdit } from "react-icons/ci";
-// const BookTable=({books})=> {
-//   return (
-//    <table className='table table-striped text-center'>
-//     <thead>
-//         <tr>
-//             <th className='border'> No</th>
-//             <th className='border'> Title</th>
-//             <th className='border'> Author</th>
-//             <th className='border'> Publish year</th>
-//             <th className='border'> Operations</th>
-//         </tr>
-//     </thead>
-//     <tbody>
-//         {books.map((books,index)=>(
-//             <tr key={books._id} className='h-8'>
-//                 <td className='border'>{index+1}</td>
-//                 <td className='border'>{books.title}</td>
-//                 <td className='border'>{books.author}</td>
-//                 <td className='border'>{books.publishYear}</td>
-//                 <td className='border'>
-//                     <div className='flex justify-center gap-x-4'>
-//                         <Link to={`/books/details/${books._id}`}>
-//                         <CiSquareInfo className='mx-3'/>
-//                         </Link>
-
-//                         <Link to={`/books/edit/${books._id}`}>
-//                         <CiEdit className='mx-3'/>
-//                         </Link>
-
-//                         <Link to={`/books/delete/${books._id}`}>
-//                         <MdDelete/>
-//                         </Link>
-//                     </div>
-//                 </td>
-                
-//             </tr>
-//         ))}
-//     </tbody>
-//    </table>
-//   )
-// }
-
-// export default BookTable
-
-
 
 import React from 'react';
 import { CiSquareInfo, CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { Link } from 'react-router-dom';
-
-const BookTable = ({ books }) => {
+import './BookTable.css'; 
+import logo from "../Home/store-logo.png"; 
+const BookTable = ({ items }) => {
   return (
-    <table className='table table-striped text-center'>
-      <thead>
-        <tr>
-          <th className='border'>No</th>
-          <th className='border'>Title</th>
-          <th className='border'>Author</th>
-          <th className='border'>Publish Year</th>
-          <th className='border'>Operations</th>
-        </tr>
-      </thead>
-      <tbody>
-        {books.map((book, index) => (
-          <tr key={book._id} className='h-8'>
-            <td className='border'>{index + 1}</td>
-            <td className='border'>{book.title}</td>
-            <td className='border'>{book.author}</td>
-            <td className='border'>{book.publishYear}</td>
-            <td className='border'>
-              <div className='d-flex justify-content-center gap-3'>
-                <Link to={`/books/details/${book._id}`}>
-                  <CiSquareInfo className='mx-3' />
-                </Link>
-                <Link to={`/books/edit/${book._id}`}>
-                  <CiEdit className='mx-3' />
-                </Link>
-                <Link to={`/books/delete/${book._id}`}>
-                  <MdDelete />
-                </Link>
+    <div className="book-table-container" style={{marginLeft:"100%", marginTop:"100px", overflow:"-moz-hidden-unscrollable"}}>
+      {items.map((item) => (
+        <div key={item._id} className="container m-4">
+          <div className="card" style={{}}>
+            <div className="logo">
+              <span className="circle c1"></span>
+              <span className="circle c2"></span>
+              <span className="circle c3"></span>
+              <span className="circle c4"></span>
+              <span className="circle c5">
+               <img
+                             src={logo}
+                             alt="Store Logo"
+                             style={{ height: "40px", width: "40px", marginTop: "5px" }}
+                           />
+              </span>
+            </div>
+            <div className="glass"   style={{
+      transformStyle: 'preserve-3d',
+      position: 'absolute',
+      inset: '8px',
+      backgroundImage: `linear-gradient(#ffffff59, #ffffffd0), url(${item.image})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      borderRadius: '55px',
+      borderTopRightRadius: '100%',
+      borderLeft: '1px solid #fff',
+      borderBottom: '1px solid white',
+      transition: '0.5s ease-in-out',
+      transform: 'translate3d(0, 0, 25px)',
+  }}>
+              <div className="content">
+              
+                <h1 style={{marginTop:"60px ", color:"#00c37b"}}>{item.name}</h1>
+                <p> </p>
               </div>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              <div className="footer">
+                <div className="social"> 
+                  <span className="social_icons">
+                    <Link to={`/items/details/${item._id}`} className="hover:text-blue-600 transition-colors duration-200 details">
+                      <CiSquareInfo />
+                    </Link>
+                  </span>
+                  <span className="social_icons">
+                    <Link to={`/items/edit/${item._id}`} className="hover:text-green-600 transition-colors duration-200 edit">
+                      <CiEdit />
+                    </Link>
+                  </span>
+                  <span className="social_icons">
+                    <Link to={`/items/delete/${item._id}`} className="hover:text-red-600 transition-colors duration-200 delete">
+                      <MdDelete />
+                    </Link>
+                  </span>
+                </div>
+                <div className="link">
+                  Read More
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 
